@@ -45,7 +45,7 @@ namespace Migrap.Net.Lime {
         }
 
         public static Node Parse(string s) {
-            var match = Regex.Match("", "^(?:([^\"&'/:<>@]{1,1023})@)?([^/@]{1,1023})(?:/(.{1,1023}))?$");
+            var match = Regex.Match(s, "^(?:([^\"&'/:<>@]{1,1023})@)?([^/@]{1,1023})(?:/(.{1,1023}))?$");
 
             if(match.Success) {
                 return new Node(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value);

@@ -11,6 +11,6 @@ namespace Migrap.Net.Lime {
 
         public Node To { get; set; }
 
-        public Metadata Metadata { get; } = new Metadata();
+        public IDictionary<string,string> Metadata { get; } = new Dictionary<string,string>(StringComparer.OrdinalIgnoreCase);
     }
 }

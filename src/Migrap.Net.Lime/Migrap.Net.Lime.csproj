@@ -50,7 +50,6 @@
     <Compile Include="Identity.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="ContentType.cs" />
-    <Compile Include="Metadata.cs" />
     <Compile Include="Method.cs" />
     <Compile Include="MethodExtensions.cs" />
     <Compile Include="Node.cs" />
