@@ -3,15 +3,15 @@ using System.Diagnostics;
 
 namespace Migrap.Net.Lime {
     [DebuggerDisplay("{DebuggerDisplay()}")]
-    public sealed class Event(string value) : IEquatable<Event> {
+    public sealed class Method(string value) :IEquatable<Method> {
         private readonly string _value = value;
 
-        public static implicit operator string (Event value) {
+        public static implicit operator string(Method value) {
             return value._value;
         }
 
-        public static implicit operator Event(string value) {
-            return new Event(value);
+        public static implicit operator Method(string value) {
+            return new Method(value);
         }
 
         private string DebuggerDisplay() {
@@ -22,7 +22,7 @@ namespace Migrap.Net.Lime {
             return _value.ToLower().GetHashCode();
         }
 
-        public bool Equals(Event other) {
+        public bool Equals(Method other) {
             if(ReferenceEquals(null, other)) {
                 return false;
             }
@@ -44,7 +44,7 @@ namespace Migrap.Net.Lime {
                 return false;
             }
 
-            return Equals((Event)obj);
+            return Equals((Method)obj);
         }
     }
 }

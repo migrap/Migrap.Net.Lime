@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Migrap.Net.Lime {
-    public abstract partial class Envelope {
-        public Envelope() : this(Guid.NewGuid()) {
-        }
+    public abstract partial class Envelope(Guid id) {
+        public Guid Id { get; } = id;
 
-        protected Envelope(Guid id) {
-            Id = id;
-        }
+        public Node From { get; set; }
 
-        public Guid Id { get; set; }
+        public Node Delegate { get; set; } //  per procurationem
+
+        public Node To { get; set; }
+
+        public Metadata Metadata { get; } = new Metadata();
     }
 }
