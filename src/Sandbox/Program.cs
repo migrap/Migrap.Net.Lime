@@ -1,4 +1,5 @@
 ﻿using Migrap.Net.Lime;
+using Migrap.Net.Lime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -14,16 +15,15 @@ namespace Sandbox {
         static void Main(string[] args) {
             Test(Message());
             Test(Notification());
-            Test(Command());       
+            Test(Command());
         }
 
-        static void Test<T>(T value) {
-            var settings = Settings();
-            var json = JsonConvert.SerializeObject(value, settings);
+        static void Test<T>(T value) where T : Envelope {
+            var bson = new Migrap.Net.Lime.Serialization.JsonSerializer();
+            var buffer = new byte[8096 * 8];
+            bson.Serialize(value as Envelope, buffer, 8096, 8096);
 
-            value = JsonConvert.DeserializeObject<T>(json, settings);
-
-            Console.WriteLine(json);
+            var envelope = bson.Deserialize<T>(buffer, 8096, 8096);
         }
 
         static Command Command() {
@@ -59,7 +59,7 @@ namespace Sandbox {
                 From = "heisenberg@breakingbad.com/bedroom",
                 To = "skyler/bedroom",
                 Type = "application/vnd.lime.threadedtext+json",
-                Content = new {
+                Content = new Cute {
                     Text = "I am the one who knowcks!",
                     Thread = 2
                 }
@@ -68,95 +68,10 @@ namespace Sandbox {
 
             return message;
         }
-            
-
-        static JsonSerializerSettings Settings() {
-            var settings = new JsonSerializerSettings()
-            {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
-                ContractResolver = new LimeCamelCasePropertyNamesContractResolver(),                
-            };
-
-            settings.Converters.Add(new NodeConverter());
-            settings.Converters.Add(new EventConverter());
-            settings.Converters.Add(new MethodConverter());
-
-            return settings;
-        }
-    }
-    internal class LimeCamelCasePropertyNamesContractResolver : CamelCasePropertyNamesContractResolver {
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization) {
-            JsonProperty property = base.CreateProperty(member, memberSerialization);
-
-            if(typeof(Envelope).IsAssignableFrom(member.DeclaringType) && property.PropertyType == typeof(Guid)) {
-                property.ShouldSerialize = x => (x as Envelope).Id != Guid.Empty;
-                
-            }
-
-            if(typeof(Envelope).IsAssignableFrom(member.DeclaringType) && property.PropertyType == typeof(IDictionary<string, string>)) {
-                property.ShouldSerialize = x => (x as Envelope).Metadata.Any();
-            }
-
-            return property;
-        }
     }
 
-    public static partial class Extensions {
-        public static bool Any<TSource>(this IEnumerable<TSource> source) {
-            return null != source && Enumerable.Any(source);
-        }
-    }
-
-
-    public class NodeConverter : JsonConverter {
-        public override bool CanConvert(Type objectType) {
-            return typeof(Node).IsAssignableFrom(objectType);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-            if(reader.TokenType == JsonToken.String) {
-                return Node.Parse((string)reader.Value);
-            }
-            throw new InvalidOperationException();
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            writer.WriteValue((string)(value as Node));
-        }
-    }
-
-    public class EventConverter : JsonConverter {
-        public override bool CanConvert(Type objectType) {
-            return typeof(Event).IsAssignableFrom(objectType);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-            if(reader.TokenType == JsonToken.String) {
-                return new Event((string)reader.Value);
-            }
-            throw new InvalidOperationException();
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            writer.WriteValue((string)(value as Event));
-        }
-    }
-
-    public class MethodConverter : JsonConverter {
-        public override bool CanConvert(Type objectType) {
-            return typeof(Method).IsAssignableFrom(objectType);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-            if(reader.TokenType == JsonToken.String) {
-                return new Method((string)reader.Value);
-            }
-            throw new InvalidOperationException();
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            writer.WriteValue((string)(value as Method));
-        }
+    public class Cute {
+        public string Text { get; set; }
+        public int Thread { get; set; }
     }
 }

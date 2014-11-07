@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrap.Net.Lime", "Migrap.N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox\Sandbox.csproj", "{02E2FD1E-386F-4A82-8B4B-45F44B485859}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrap.Net.Lime.Serialization.Json", "Migrap.Net.Lime.Serialization.Json\Migrap.Net.Lime.Serialization.Json.csproj", "{550A6667-DC89-4A92-AF7D-12339B10880B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{02E2FD1E-386F-4A82-8B4B-45F44B485859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02E2FD1E-386F-4A82-8B4B-45F44B485859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02E2FD1E-386F-4A82-8B4B-45F44B485859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550A6667-DC89-4A92-AF7D-12339B10880B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550A6667-DC89-4A92-AF7D-12339B10880B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550A6667-DC89-4A92-AF7D-12339B10880B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550A6667-DC89-4A92-AF7D-12339B10880B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

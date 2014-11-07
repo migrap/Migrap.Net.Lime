@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{02E2FD1E-386F-4A82-8B4B-45F44B485859}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{550A6667-DC89-4A92-AF7D-12339B10880B}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sandbox</RootNamespace>
-    <AssemblyName>Sandbox</AssemblyName>
+    <RootNamespace>Migrap.Net.Lime.Serialization</RootNamespace>
+    <AssemblyName>Migrap.Net.Lime.Serialization.Json</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <LangVersion>Experimental</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,22 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Converters\EventConverter.cs" />
+    <Compile Include="Converters\MethodConverter.cs" />
+    <Compile Include="Converters\NodeConverter.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="JsonContractResolver.cs" />
+    <Compile Include="JsonSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Migrap.Net.Lime.Serialization.Json\Migrap.Net.Lime.Serialization.Json.csproj">
-      <Project>{550a6667-dc89-4a92-af7d-12339b10880b}</Project>
-      <Name>Migrap.Net.Lime.Serialization.Json</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Migrap.Net.Lime\Migrap.Net.Lime.csproj">
       <Project>{fd17eeab-cbe5-46ab-aacc-525e96f3e1dd}</Project>
       <Name>Migrap.Net.Lime</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
