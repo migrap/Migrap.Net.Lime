@@ -20,5 +20,9 @@ namespace Migrap.Net.Lime {
         public string Status { get; set; }
 
         public Reason Reason { get; set; }
+
+        public override string ToString() {
+            return (new { Id, Uri, Method }).ToString();
+        }
     }
 }

@@ -40,9 +40,17 @@ namespace Migrap.Net.Lime.Serialization {
             throw new ArgumentException("value is not a valid envelope");
         }
 
-        private T Deserialize<T>(byte[] buffer, int offset, int count, JsonSerializerSettings settings) where T : Envelope {
-            return (T)Deserialize(Encoding.UTF8.GetString(buffer, offset, count), settings);            
+        public Envelope Deserialize(byte[] buffer, int offset, int count) {
+            return Deserialize(buffer, offset, count, _settings);
         }
+
+        private Envelope Deserialize(byte[] buffer, int offset, int count, JsonSerializerSettings settings) {
+            return Deserialize(Encoding.UTF8.GetString(buffer, offset, count), settings);
+        }
+
+        private T Deserialize<T>(byte[] buffer, int offset, int count, JsonSerializerSettings settings) where T : Envelope {
+            return (T)Deserialize(buffer, offset, count, settings);
+        }        
 
         public T Deserialize<T>(byte[] buffer, int offset, int count) where T : Envelope {
             return (T)Deserialize<T>(buffer, offset, count, _settings);
