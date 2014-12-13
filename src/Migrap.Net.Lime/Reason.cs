@@ -3,10 +3,15 @@ using System.Diagnostics;
 
 namespace Migrap.Net.Lime {
     [DebuggerDisplay("{DebuggerDisplay()}")]
-    public partial class Reason(int code, string description) : IEquatable<Reason> {
-        public int Code { get; } = code;
+    public partial class Reason : IEquatable<Reason> {
+        public int Code { get; }
 
-        public string Description { get; } = description;
+        public string Description { get; }
+
+        public Reason(int code, string description) {
+            Code = code;
+            Description = description;
+        }
 
         private string DebuggerDisplay() {
             return string.Format("{0} (Code {1})", Description, Code);

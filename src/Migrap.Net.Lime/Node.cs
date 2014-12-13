@@ -2,10 +2,16 @@
 using System.Text.RegularExpressions;
 
 namespace Migrap.Net.Lime {
-    public class Node(string name, string domain, string instance) : Identity, IEquatable<Node> {
-        public override string Name { get; } = name;
-        public override string Domain { get; } = domain;
-        public string Instance { get; } = instance;
+    public class Node : Identity, IEquatable<Node> {
+        public override string Name { get; }
+        public override string Domain { get; }
+        public string Instance { get; }
+
+        public Node(string name, string domain, string instance) {
+            Name = name;
+            Domain = domain;
+            Instance = instance;
+        }
 
         public override string ToString() {
             if(string.IsNullOrWhiteSpace(Instance)) {

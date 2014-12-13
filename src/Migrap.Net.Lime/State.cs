@@ -3,8 +3,12 @@ using System.Diagnostics;
 
 namespace Migrap.Net.Lime {
     [DebuggerDisplay("{DebuggerDisplay()}")]
-    public sealed class State(string value) : IEquatable<State> {
-        private readonly string _value = value;
+    public sealed class State : IEquatable<State> {
+        private readonly string _value;
+
+        public State(string value) {
+            _value = value;
+        }
 
         public static implicit operator string (State value) {
             return value._value;

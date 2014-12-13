@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 
 namespace Migrap.Net.Lime {
-    public abstract partial class Envelope(Guid id) {
-        public Guid Id { get; } = id;
+    public abstract partial class Envelope {
+
+        public Envelope(Guid id) {
+            Id = id;
+        }
+
+        public Guid Id { get; }
 
         public Node From { get; set; }
 

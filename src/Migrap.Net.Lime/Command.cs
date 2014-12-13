@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Migrap.Net.Lime {
-    public class Command(Guid id) : Envelope(id) {
+    public class Command : Envelope {
+
+        public Command(Guid id) : base(id) { }
+
         public Method Method { get; set; }
 
         public string Uri { get; set; }
